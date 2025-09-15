@@ -1,0 +1,108 @@
+---
+export interface Props {
+  title?: string;
+  tagline?: string;
+}
+
+const {
+  title = "Lead the AI-Human Revolution",
+  tagline = "Transform your organization into a hybrid powerhouse where humans and AI collaborate seamlessly"
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>{title}</h1>
+    <p class="tagline">{tagline}</p>
+    <div class="hero-buttons">
+      <a href="#" class="primary-button">Start Your Journey</a>
+      <a href="#" class="secondary-button">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    margin-top: 70px;
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-coral), transparent);
+    opacity: 0.1;
+    border-radius: 50%;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+    color: var(--neutral-gray);
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .primary-button {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  }
+
+  .primary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+  }
+
+  .secondary-button {
+    background: white;
+    color: var(--primary-blue);
+    padding: 1rem 2rem;
+    border: 2px solid var(--primary-blue);
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+  }
+
+  .secondary-button:hover {
+    background: var(--primary-blue);
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 1rem;
+    }
+  }
+</style>

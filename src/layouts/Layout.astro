@@ -1,0 +1,70 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Transform your organization into a hybrid powerhouse where humans and AI collaborate seamlessly" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary-blue: #2563EB;
+    --secondary-purple: #7C3AED;
+    --accent-coral: #FB7185;
+    --deep-navy: #1E293B;
+    --light-gray: #F8FAFC;
+    --success-green: #10B981;
+    --warning-amber: #F59E0B;
+    --neutral-gray: #64748B;
+    --light-neutral: #CBD5E1;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--deep-navy);
+    background: var(--light-gray);
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--deep-navy), var(--secondary-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--deep-navy);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>

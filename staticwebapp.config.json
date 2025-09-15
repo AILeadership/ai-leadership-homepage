@@ -1,0 +1,66 @@
+{
+  "trailingSlash": "never",
+  "platform": {
+    "apiRuntime": "node:18"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/_astro/*",
+      "/favicon.svg",
+      "/*.css",
+      "/*.js",
+      "/*.json",
+      "/api/*"
+    ]
+  },
+  "routes": [
+    {
+      "route": "/_astro/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/favicon.svg",
+      "headers": {
+        "cache-control": "public, max-age=86400"
+      }
+    },
+    {
+      "route": "/*.html",
+      "headers": {
+        "cache-control": "public, max-age=300"
+      }
+    },
+    {
+      "route": "/",
+      "headers": {
+        "cache-control": "public, max-age=300"
+      }
+    }
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html",
+      "statusCode": 404
+    }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".js": "application/javascript",
+    ".mjs": "application/javascript",
+    ".css": "text/css",
+    ".html": "text/html",
+    ".svg": "image/svg+xml",
+    ".webp": "image/webp",
+    ".woff2": "font/woff2"
+  }
+}

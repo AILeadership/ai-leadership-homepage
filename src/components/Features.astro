@@ -1,0 +1,98 @@
+---
+const features = [
+  {
+    icon: '🎯',
+    title: 'Strategic AI Integration',
+    description: 'Develop clear strategies for incorporating AI colleagues into your existing teams while maintaining human-centered values.'
+  },
+  {
+    icon: '🤝',
+    title: 'Human-AI Collaboration',
+    description: 'Master the art of orchestrating hybrid teams where humans and AI enhance each other\'s strengths.'
+  },
+  {
+    icon: '📚',
+    title: 'Executive Education',
+    description: 'Comprehensive training programs designed specifically for leaders navigating the AI transformation.'
+  }
+];
+---
+
+<section class="features" id="services">
+  <div class="features-container">
+    <h2>Empowering Leaders for the AI Era</h2>
+    <p class="section-subtitle">Build a future-ready organization with our comprehensive AI leadership framework</p>
+    <div class="features-grid">
+      {features.map(feature => (
+        <div class="feature-card">
+          <div class="feature-icon">{feature.icon}</div>
+          <h3 class="feature-title">{feature.title}</h3>
+          <p class="feature-description">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 5rem 2rem;
+    background: white;
+  }
+
+  .features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--neutral-gray);
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    padding: 2rem;
+    border-radius: 15px;
+    background: var(--light-gray);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .feature-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--deep-navy);
+  }
+
+  .feature-description {
+    color: var(--neutral-gray);
+    line-height: 1.7;
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+export interface Props {
+  heading?: string;
+  description?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+const {
+  heading = "Ready to Transform Your Leadership?",
+  description = "Join forward-thinking organizations building the future of work",
+  buttonText = "Schedule a Consultation",
+  buttonLink = "#"
+} = Astro.props;
+---
+
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>{heading}</h2>
+    <p class="cta-description">{description}</p>
+    <a href={buttonLink} class="cta-button-white">{buttonText}</a>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .cta-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .cta-button-white {
+    background: white;
+    color: var(--primary-blue);
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+
+  .cta-button-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  }
+</style>
