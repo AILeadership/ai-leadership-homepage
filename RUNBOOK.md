@@ -1,10 +1,10 @@
 ---
 title: "AI Leadership Homepage - Complete Setup Runbook"
-version: "1.0.0"
+version: "2.0.0"
 date: "2025-09-16"
 author: "AI Leadership Team"
 type: "runbook"
-tags: ["azure", "astro", "static-web-apps", "deployment", "infrastructure"]
+tags: ["azure", "astro", "static-web-apps", "deployment", "infrastructure", "github-actions"]
 prerequisites:
   - "Node.js 18+"
   - "npm 9+"
@@ -12,8 +12,10 @@ prerequisites:
   - "GitHub CLI"
   - "Git"
   - "Visual Studio Code (optional)"
-estimated_time: "4-5 hours"
+estimated_time: "3-4 hours"
 difficulty: "intermediate"
+status: "production-ready"
+last_verified: "2025-09-16"
 ---
 
 # AI Leadership Homepage - Complete Setup Runbook
@@ -791,6 +793,9 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment: production
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -814,13 +819,15 @@ jobs:
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"
+          app_location: "dist"
           api_location: ""
-          output_location: "dist"
+          output_location: ""
           skip_app_build: true
 
   close_pull_request_job:
@@ -849,19 +856,49 @@ cd infra
 # You'll need this for the next step
 ```
 
-### Step 16: Configure GitHub Secret
+### Step 16: Configure GitHub Environment and Secret
 
 ```bash
-# Add deployment token to GitHub (replace with your token)
-gh secret set AZURE_STATIC_WEB_APPS_API_TOKEN \
+# Create production environment in GitHub
+gh api /repos/AILeadership/ai-leadership-homepage/environments/production \
+  --method PUT \
+  -H "Accept: application/vnd.github+json"
+
+# Get deployment token from Azure
+DEPLOYMENT_TOKEN=$(az staticwebapp secrets list \
+  --name swa-ai-leadership \
+  --resource-group rg-ai-leadership \
+  --query "properties.apiKey" -o tsv)
+
+# Add deployment token to GitHub environment secret
+echo "$DEPLOYMENT_TOKEN" | gh secret set AZURE_STATIC_WEB_APPS_API_TOKEN \
   --repo AILeadership/ai-leadership-homepage \
-  --body "YOUR_DEPLOYMENT_TOKEN_HERE"
+  --env production
 
 # Verify secret was added
-gh secret list --repo AILeadership/ai-leadership-homepage
+gh secret list --repo AILeadership/ai-leadership-homepage --env production
 ```
 
-### Step 17: Alternative Deployment Method (Recommended)
+### Step 17: GitHub Actions Deployment (Primary Method)
+
+The GitHub Actions workflow is now fully configured with:
+- Environment binding to production
+- Proper permissions
+- Correct app_location pointing to dist folder
+- Token set as environment variable
+
+```bash
+# Push to trigger automatic deployment
+git add .
+git commit -m "Deploy to Azure Static Web Apps"
+git push origin main
+
+# Monitor deployment
+gh run list --repo AILeadership/ai-leadership-homepage --limit 1
+gh run watch --repo AILeadership/ai-leadership-homepage
+```
+
+### Step 18: Alternative Deployment Method (Backup)
 
 ```bash
 # Install Azure SWA CLI globally
