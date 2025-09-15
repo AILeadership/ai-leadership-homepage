@@ -25,14 +25,11 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: ./ai-leadership-site/package-lock.json
 
       - name: Install dependencies
-        working-directory: ./ai-leadership-site
         run: npm ci
 
       - name: Build Astro site
-        working-directory: ./ai-leadership-site
         run: npm run build
         env:
           NODE_ENV: production
@@ -43,7 +40,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/ai-leadership-site"
+          app_location: "/"
           api_location: ""
           output_location: "dist"
           skip_app_build: true

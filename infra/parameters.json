@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "staticWebAppName": {
+      "value": "swa-ai-leadership"
+    },
+    "location": {
+      "value": "westeurope"
+    },
+    "sku": {
+      "value": "Free"
+    },
+    "repositoryUrl": {
+      "value": "https://github.com/AILeadership/ai-leadership-homepage"
+    },
+    "branch": {
+      "value": "main"
+    },
+    "appLocation": {
+      "value": "/"
+    },
+    "apiLocation": {
+      "value": ""
+    },
+    "outputLocation": {
+      "value": "dist"
+    },
+    "tags": {
+      "value": {
+        "project": "ai-leadership",
+        "environment": "production",
+        "managedBy": "bicep"
+      }
+    }
+  }
+}
