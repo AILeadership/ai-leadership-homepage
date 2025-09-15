@@ -31,14 +31,23 @@
 - ✅ Static Web App provisioned
 - ✅ Deployment token generated
 - ✅ GitHub secret configured
+- ✅ **Site deployed and live**: https://mango-bush-02dfbaf03.1.azurestaticapps.net
+
+### Deployment Methods
+
+#### Method 1: Direct CLI Deployment (Recommended)
+```bash
+npm run deploy:azure
+```
+
+#### Method 2: GitHub Actions (Being debugged)
+- Automatic deployment on push to main branch
+- Currently experiencing token authentication issues
 
 ### Next Steps
-1. Push code to GitHub repository:
-   ```bash
-   git push -u origin main
-   ```
-2. GitHub Actions will automatically deploy the site
-3. Access the site at: https://mango-bush-02dfbaf03.1.azurestaticapps.net
+1. Site is already live at: https://mango-bush-02dfbaf03.1.azurestaticapps.net
+2. For updates, use: `npm run deploy:azure`
+3. Custom domain can be configured in Azure Portal
 
 ### Custom Domain (Optional)
 To add a custom domain:
